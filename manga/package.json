@@ -1,0 +1,37 @@
+{
+  "name": "manga-translator-firefox-extension",
+  "version": "1.0.0",
+  "description": "Firefox extension to translate manga and manhwa images using free OCR and translation services",
+  "private": true,
+  "scripts": {
+    "create-icons": "node icons/create_icons.js",
+    "package": "powershell -Command \"Compress-Archive -Path manifest.json,popup,content,background,options,icons -DestinationPath manga-translator.zip -Force; Rename-Item -Path manga-translator.zip -NewName manga-translator.xpi -Force\"",
+    "test": "echo \"No tests specified yet\""
+  },
+  "keywords": [
+    "manga",
+    "manhwa",
+    "translator",
+    "ocr",
+    "firefox",
+    "extension",
+    "tesseract",
+    "libretranslate"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/manga-translator-extension"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/manga-translator-extension/issues"
+  },
+  "homepage": "https://github.com/yourusername/manga-translator-extension#readme",
+  "firefox": {
+    "id": "manga-translator@example.com",
+    "strict_min_version": "91.0"
+  }
+}

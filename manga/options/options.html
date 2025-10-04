@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Manga Translator - Settings</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      padding: 0;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 30px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .header h1 {
+      font-size: 28px;
+      margin-bottom: 5px;
+    }
+
+    .header p {
+      opacity: 0.9;
+      font-size: 14px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .section {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .section h2 {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #667eea;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .setting-row {
+      margin-bottom: 25px;
+    }
+
+    .setting-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .setting-row label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .setting-row .description {
+      font-size: 13px;
+      color: #6c757d;
+      margin-bottom: 10px;
+    }
+
+    .setting-row select,
+    .setting-row input[type="number"],
+    .setting-row input[type="text"],
+    .setting-row input[type="url"] {
+      width: 100%;
+      max-width: 400px;
+      padding: 10px 15px;
+      border: 1px solid #ced4da;
+      border-radius: 8px;
+      font-size: 14px;
+      background: white;
+      transition: border-color 0.2s;
+    }
+
+    .setting-row select:focus,
+    .setting-row input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .setting-row input[type="color"] {
+      width: 80px;
+      height: 40px;
+      border: 1px solid #ced4da;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .setting-row input[type="range"] {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .range-value {
+      display: inline-block;
+      margin-left: 15px;
+      font-weight: 600;
+      color: #667eea;
+      min-width: 50px;
+    }
+
+    .checkbox-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .checkbox-wrapper input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+
+    .color-preview {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .preview-box {
+      width: 100px;
+      height: 40px;
+      border-radius: 6px;
+      border: 1px solid #ced4da;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+      padding-top: 30px;
+      border-top: 1px solid #e9ecef;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-secondary {
+      background: #6c757d;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: #5a6268;
+    }
+
+    .btn-danger {
+      background: #dc3545;
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background: #c82333;
+    }
+
+    .toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #28a745;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      opacity: 0;
+      transform: translateX(400px);
+      transition: all 0.3s;
+      z-index: 1000;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .info-box {
+      background: #e7f3ff;
+      border-left: 4px solid #667eea;
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 6px;
+      font-size: 13px;
+      color: #004085;
+    }
+
+    .warning-box {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 6px;
+      font-size: 13px;
+      color: #856404;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>⚙️ Manga Translator Settings</h1>
+    <p>Configure translation preferences and appearance</p>
+  </div>
+
+  <div class="container">
+    <!-- Language Settings -->
+    <div class="section">
+      <h2>🌐 Language Settings</h2>
+      
+      <div class="setting-row">
+        <label for="sourceLang">Source Language</label>
+        <div class="description">Language of the text in manga/manhwa images</div>
+        <select id="sourceLang">
+          <option value="auto">Auto Detect</option>
+          <option value="ja">Japanese</option>
+          <option value="ko">Korean</option>
+          <option value="zh">Chinese (Simplified)</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+
+      <div class="setting-row">
+        <label for="targetLang">Target Language</label>
+        <div class="description">Language to translate to</div>
+        <select id="targetLang">
+          <option value="en">English</option>
+          <option value="ja">Japanese</option>
+          <option value="ko">Korean</option>
+          <option value="zh">Chinese (Simplified)</option>
+          <option value="es">Spanish</option>
+          <option value="fr">French</option>
+          <option value="de">German</option>
+          <option value="pt">Portuguese</option>
+          <option value="ru">Russian</option>
+          <option value="ar">Arabic</option>
+          <option value="hi">Hindi</option>
+          <option value="it">Italian</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Appearance Settings -->
+    <div class="section">
+      <h2>🎨 Appearance Settings</h2>
+      
+      <div class="setting-row">
+        <label for="fontSize">Font Size</label>
+        <div class="description">Size of translated text overlay</div>
+        <input type="range" id="fontSize" min="10" max="32" step="1" value="16">
+        <span id="fontSizeValue" class="range-value">16px</span>
+      </div>
+
+      <div class="setting-row">
+        <label for="overlayBgColor">Overlay Background Color</label>
+        <div class="description">Background color for translation boxes</div>
+        <div class="color-preview">
+          <input type="color" id="overlayBgColor" value="#000000">
+          <div id="colorPreview" class="preview-box" style="background: #000000;">Preview</div>
+        </div>
+      </div>
+
+      <div class="setting-row">
+        <label for="overlayOpacity">Overlay Opacity</label>
+        <div class="description">Transparency of translation background (0 = transparent, 1 = solid)</div>
+        <input type="range" id="overlayOpacity" min="0" max="1" step="0.05" value="0.7">
+        <span id="opacityValue" class="range-value">0.7</span>
+      </div>
+
+      <div class="setting-row">
+        <label for="textColor">Text Color</label>
+        <div class="description">Color of translated text</div>
+        <input type="color" id="textColor" value="#ffffff">
+      </div>
+
+      <div class="setting-row">
+        <label for="fontFamily">Font Family</label>
+        <div class="description">Font used for translated text</div>
+        <select id="fontFamily">
+          <option value="Arial, sans-serif">Arial</option>
+          <option value="'Segoe UI', sans-serif">Segoe UI</option>
+          <option value="'Comic Sans MS', cursive">Comic Sans MS</option>
+          <option value="'Courier New', monospace">Courier New</option>
+          <option value="Georgia, serif">Georgia</option>
+          <option value="'Times New Roman', serif">Times New Roman</option>
+          <option value="Verdana, sans-serif">Verdana</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- OCR Settings -->
+    <div class="section">
+      <h2>📝 OCR Settings</h2>
+      
+      <div class="setting-row">
+        <label for="ocrEngine">OCR Engine</label>
+        <div class="description">Text recognition engine (Tesseract.js built-in)</div>
+        <select id="ocrEngine">
+          <option value="tesseract">Tesseract.js (Default)</option>
+        </select>
+      </div>
+
+      <div class="setting-row">
+        <label>Vertical Text Detection</label>
+        <div class="checkbox-wrapper">
+          <input type="checkbox" id="verticalText" checked>
+          <span>Enable detection of vertical text (common in Japanese manga)</span>
+        </div>
+      </div>
+
+      <div class="setting-row">
+        <label for="minImageSize">Minimum Image Size</label>
+        <div class="description">Ignore images smaller than this (in pixels, width × height)</div>
+        <input type="number" id="minImageSize" value="10000" min="1000" step="1000">
+      </div>
+    </div>
+
+    <!-- Translation API Settings -->
+    <div class="section">
+      <h2>🔄 Translation API Settings</h2>
+      
+      <div class="setting-row">
+        <label for="translationAPI">Translation Service</label>
+        <div class="description">API service for translating text</div>
+        <select id="translationAPI">
+          <option value="libretranslate">LibreTranslate (Free)</option>
+          <option value="libretranslate-custom">LibreTranslate (Custom Instance)</option>
+        </select>
+      </div>
+
+      <div class="setting-row" id="customAPIUrlRow" style="display: none;">
+        <label for="customAPIUrl">Custom LibreTranslate URL</label>
+        <div class="description">URL of your self-hosted LibreTranslate instance</div>
+        <input type="url" id="customAPIUrl" placeholder="https://your-instance.com">
+        <div class="info-box">
+          To host your own LibreTranslate instance, visit: <a href="https://github.com/LibreTranslate/LibreTranslate" target="_blank">github.com/LibreTranslate/LibreTranslate</a>
+        </div>
+      </div>
+
+      <div class="setting-row">
+        <label for="apiTimeout">API Timeout (seconds)</label>
+        <div class="description">Maximum time to wait for translation response</div>
+        <input type="number" id="apiTimeout" value="30" min="5" max="120" step="5">
+      </div>
+    </div>
+
+    <!-- Performance Settings -->
+    <div class="section">
+      <h2>⚡ Performance Settings</h2>
+      
+      <div class="setting-row">
+        <label for="maxConcurrent">Maximum Concurrent Translations</label>
+        <div class="description">Number of images to process simultaneously</div>
+        <input type="number" id="maxConcurrent" value="3" min="1" max="10" step="1">
+      </div>
+
+      <div class="setting-row">
+        <label>Enable Caching</label>
+        <div class="checkbox-wrapper">
+          <input type="checkbox" id="enableCache" checked>
+          <span>Cache translations to avoid re-processing the same images</span>
+        </div>
+      </div>
+
+      <div class="setting-row">
+        <label for="cacheExpiry">Cache Expiry (days)</label>
+        <div class="description">How long to keep cached translations</div>
+        <input type="number" id="cacheExpiry" value="7" min="1" max="30" step="1">
+      </div>
+    </div>
+
+    <!-- Advanced Settings -->
+    <div class="section">
+      <h2>🔧 Advanced Settings</h2>
+      
+      <div class="setting-row">
+        <label>Debug Mode</label>
+        <div class="checkbox-wrapper">
+          <input type="checkbox" id="debugMode">
+          <span>Enable console logging for troubleshooting</span>
+        </div>
+      </div>
+
+      <div class="setting-row">
+        <label>Show Bounding Boxes</label>
+        <div class="checkbox-wrapper">
+          <input type="checkbox" id="showBoundingBoxes">
+          <span>Display detection boxes around recognized text</span>
+        </div>
+      </div>
+
+      <div class="warning-box">
+        ⚠️ Changes to advanced settings may affect extension performance. Use with caution.
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="section">
+      <div class="buttons">
+        <button id="saveBtn" class="btn btn-primary">💾 Save Settings</button>
+        <button id="resetBtn" class="btn btn-secondary">🔄 Reset to Defaults</button>
+        <button id="clearCacheBtn" class="btn btn-danger">🗑️ Clear Cache</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast">Settings saved successfully!</div>
+
+  <script src="options.js"></script>
+</body>
+</html>

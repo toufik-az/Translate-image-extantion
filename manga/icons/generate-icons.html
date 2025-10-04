@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Icon Generator</title>
+</head>
+<body>
+  <h1>Manga Translator Icon Generator</h1>
+  <p>Icons generated as SVG. Right-click each icon and "Save As" PNG.</p>
+  
+  <h2>48x48 Icon</h2>
+  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" id="icon48">
+    <!-- Background circle -->
+    <circle cx="24" cy="24" r="22" fill="url(#gradient48)" stroke="#5a4d9f" stroke-width="2"/>
+    
+    <!-- Gradient definition -->
+    <defs>
+      <linearGradient id="gradient48" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+      </linearGradient>
+    </defs>
+    
+    <!-- Book icon -->
+    <rect x="14" y="12" width="20" height="24" rx="2" fill="white" opacity="0.9"/>
+    <line x1="24" y1="12" x2="24" y2="36" stroke="#667eea" stroke-width="2"/>
+    
+    <!-- Translation arrows -->
+    <path d="M 16 20 L 22 20 M 19 17 L 22 20 L 19 23" stroke="#667eea" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <path d="M 32 28 L 26 28 M 29 25 L 26 28 L 29 31" stroke="#764ba2" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    
+    <!-- Text lines -->
+    <line x1="16" y1="26" x2="22" y2="26" stroke="#666" stroke-width="1"/>
+    <line x1="16" y1="30" x2="20" y2="30" stroke="#666" stroke-width="1"/>
+    <line x1="26" y1="18" x2="32" y2="18" stroke="#666" stroke-width="1"/>
+    <line x1="26" y1="22" x2="30" y2="22" stroke="#666" stroke-width="1"/>
+  </svg>
+  
+  <h2>96x96 Icon</h2>
+  <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96" id="icon96">
+    <!-- Background circle -->
+    <circle cx="48" cy="48" r="44" fill="url(#gradient96)" stroke="#5a4d9f" stroke-width="4"/>
+    
+    <!-- Gradient definition -->
+    <defs>
+      <linearGradient id="gradient96" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+      </linearGradient>
+    </defs>
+    
+    <!-- Book icon -->
+    <rect x="28" y="24" width="40" height="48" rx="4" fill="white" opacity="0.9"/>
+    <line x1="48" y1="24" x2="48" y2="72" stroke="#667eea" stroke-width="4"/>
+    
+    <!-- Translation arrows -->
+    <path d="M 32 40 L 44 40 M 38 34 L 44 40 L 38 46" stroke="#667eea" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M 64 56 L 52 56 M 58 50 L 52 56 L 58 62" stroke="#764ba2" stroke-width="3" fill="none" stroke-linecap="round"/>
+    
+    <!-- Text lines -->
+    <line x1="32" y1="52" x2="44" y2="52" stroke="#666" stroke-width="2"/>
+    <line x1="32" y1="60" x2="40" y2="60" stroke="#666" stroke-width="2"/>
+    <line x1="52" y1="36" x2="64" y2="36" stroke="#666" stroke-width="2"/>
+    <line x1="52" y1="44" x2="60" y2="44" stroke="#666" stroke-width="2"/>
+  </svg>
+
+  <script>
+    // Function to convert SVG to PNG and download
+    function saveSvgAsPng(svgId, filename, width, height) {
+      const svg = document.getElementById(svgId);
+      const svgData = new XMLSerializer().serializeToString(svg);
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      
+      img.onload = function() {
+        ctx.drawImage(img, 0, 0);
+        canvas.toBlob(function(blob) {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = filename;
+          a.click();
+          URL.revokeObjectURL(url);
+        });
+      };
+      
+      img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
+    }
+    
+    // Auto-generate on load
+    window.addEventListener('load', function() {
+      setTimeout(() => {
+        saveSvgAsPng('icon48', 'icon-48.png', 48, 48);
+        setTimeout(() => {
+          saveSvgAsPng('icon96', 'icon-96.png', 96, 96);
+        }, 500);
+      }, 500);
+    });
+  </script>
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    svg {
+      border: 2px solid #ddd;
+      background: white;
+      margin: 10px 0;
+      display: block;
+    }
+  </style>
+</body>
+</html>

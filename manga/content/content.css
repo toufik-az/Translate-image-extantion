@@ -1,0 +1,312 @@
+/**
+ * CSS for Manga Translator Content Script
+ * Styles for translation overlays and visual elements
+ */
+
+/* Main overlay container */
+.manga-translator-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+}
+
+/* Translation text box */
+.manga-translator-text {
+  position: relative;
+  display: inline-block;
+  max-width: 90%;
+  max-height: 90%;
+  overflow: auto;
+  pointer-events: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: fadeInScale 0.3s ease-out;
+  cursor: default;
+  text-align: center;
+  z-index: 10;
+}
+
+/* Bounding boxes for detected text (debug mode) */
+.manga-translator-bbox {
+  position: absolute;
+  border: 2px solid rgba(255, 0, 0, 0.6);
+  background: rgba(255, 0, 0, 0.1);
+  pointer-events: none;
+  z-index: 5;
+  transition: all 0.2s;
+}
+
+.manga-translator-bbox:hover {
+  background: rgba(255, 0, 0, 0.2);
+  border-color: rgba(255, 0, 0, 0.9);
+}
+
+/* Loading indicator for individual images */
+.manga-translator-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 15px 25px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 1000000;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.manga-translator-loading::before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Spinner animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Fade in scale animation for text boxes */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Highlight effect when hovering over translations */
+.manga-translator-text:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  transform: scale(1.02);
+  transition: all 0.2s ease;
+}
+
+/* Error indicator */
+.manga-translator-error {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(220, 53, 69, 0.9);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  z-index: 1000001;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Success indicator */
+.manga-translator-success {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(40, 167, 69, 0.9);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  z-index: 1000001;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  animation: slideInRight 0.3s ease-out, fadeOut 0.3s 2s forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+/* Toggle button for showing/hiding translations */
+.manga-translator-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  z-index: 1000002;
+  transition: all 0.3s ease;
+}
+
+.manga-translator-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.5);
+}
+
+.manga-translator-toggle:active {
+  transform: translateY(0);
+}
+
+/* Progress bar overlay (global) */
+.manga-translator-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 1000003;
+  overflow: hidden;
+}
+
+.manga-translator-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(102, 126, 234, 0.6);
+}
+
+/* Vertical text support */
+.manga-translator-text.vertical {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}
+
+/* Hidden state */
+.manga-translator-overlay.hidden {
+  display: none;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .manga-translator-text {
+    font-size: 14px !important;
+    max-width: 95%;
+    padding: 8px !important;
+  }
+  
+  .manga-translator-toggle {
+    bottom: 10px;
+    right: 10px;
+    padding: 10px 20px;
+    font-size: 12px;
+  }
+}
+
+/* Print styles - hide overlays when printing */
+@media print {
+  .manga-translator-overlay,
+  .manga-translator-toggle,
+  .manga-translator-progress {
+    display: none !important;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .manga-translator-loading {
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+  }
+  
+  .manga-translator-loading::before {
+    border-color: rgba(0, 0, 0, 0.3);
+    border-top-color: #333;
+  }
+}
+
+/* Smooth transitions when toggling visibility */
+.manga-translator-overlay {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.manga-translator-overlay.transitioning {
+  opacity: 0;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .manga-translator-text {
+    border: 2px solid currentColor;
+  }
+  
+  .manga-translator-bbox {
+    border-width: 3px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .manga-translator-overlay,
+  .manga-translator-text,
+  .manga-translator-toggle,
+  .manga-translator-bbox {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Custom scrollbar for translation text boxes */
+.manga-translator-text::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.manga-translator-text::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.manga-translator-text::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+.manga-translator-text::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* Selection styling within translated text */
+.manga-translator-text::selection {
+  background: rgba(102, 126, 234, 0.3);
+  color: inherit;
+}
+
+/* Focus styles for accessibility */
+.manga-translator-text:focus {
+  outline: 3px solid rgba(102, 126, 234, 0.5);
+  outline-offset: 2px;
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Manga Translator</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📖 Manga Translator</h1>
+    </header>
+
+    <div class="status-section">
+      <div id="statusIndicator" class="status-indicator inactive">
+        <span class="status-dot"></span>
+        <span id="statusText">Inactive</span>
+      </div>
+    </div>
+
+    <div class="control-section">
+      <button id="toggleBtn" class="btn btn-primary">
+        <span id="toggleBtnText">Activate Translation</span>
+      </button>
+    </div>
+
+    <div class="quick-settings">
+      <div class="setting-group">
+        <label for="sourceLang">Source Language:</label>
+        <select id="sourceLang">
+          <option value="auto">Auto Detect</option>
+          <option value="ja">Japanese</option>
+          <option value="ko">Korean</option>
+          <option value="zh">Chinese</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+
+      <div class="setting-group">
+        <label for="targetLang">Target Language:</label>
+        <select id="targetLang">
+          <option value="en">English</option>
+          <option value="ja">Japanese</option>
+          <option value="ko">Korean</option>
+          <option value="zh">Chinese</option>
+          <option value="es">Spanish</option>
+          <option value="fr">French</option>
+          <option value="de">German</option>
+          <option value="pt">Portuguese</option>
+          <option value="ru">Russian</option>
+          <option value="ar">Arabic</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="progress-section" id="progressSection" style="display: none;">
+      <div class="progress-bar">
+        <div id="progressFill" class="progress-fill"></div>
+      </div>
+      <div id="progressText" class="progress-text">Processing images...</div>
+    </div>
+
+    <div class="stats-section" id="statsSection" style="display: none;">
+      <div class="stat-item">
+        <span class="stat-label">Images found:</span>
+        <span id="imageCount" class="stat-value">0</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Processed:</span>
+        <span id="processedCount" class="stat-value">0</span>
+      </div>
+    </div>
+
+    <div class="actions-section">
+      <button id="toggleViewBtn" class="btn btn-secondary" style="display: none;">
+        Show Original
+      </button>
+      <button id="retryBtn" class="btn btn-secondary" style="display: none;">
+        Retry Failed
+      </button>
+    </div>
+
+    <footer>
+      <button id="settingsBtn" class="btn-link">⚙️ Settings</button>
+      <button id="helpBtn" class="btn-link">❓ Help</button>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
