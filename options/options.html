@@ -22,6 +22,7 @@
 <label>Service<select id="translationAPI"><option value="google">Google Translate (unofficial endpoint)</option><option value="mymemory">MyMemory</option><option value="libretranslate">LibreTranslate public service</option><option value="libretranslate-custom">LibreTranslate custom server</option></select></label>
 <div id="libreBox"><label>Server URL<input type="url" id="customAPIUrl" placeholder="http://localhost:5000"></label><label>API key (optional)<input type="password" id="apiKey" autocomplete="off"></label></div>
 <p class="hint">Detected text is sent to the selected service. Providers may have quotas or require an API key.</p>
+<p class="hint">Saving a LibreTranslate API key asks permission to send it to the selected server. Saved settings, including keys, may sync through Firefox Sync. You can revoke API key sharing in Firefox's extension settings.</p>
 <label>Request timeout (seconds)<input type="number" id="apiTimeout" min="5" max="120" step="5"></label>
 </fieldset>
 <fieldset><legend>Cache</legend><label class="check"><input type="checkbox" id="enableCache"> Remember translations on this device</label><label>Keep cached translations for (days)<input type="number" id="cacheExpiry" min="1" max="30"></label><button type="button" class="btn btn-soft" id="clearCache">Clear translation cache</button></fieldset>

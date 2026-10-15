@@ -195,7 +195,10 @@ async function translate(job, text) {
       const url = new URL(base + (base.endsWith('/translate') ? '' : '/translate'));
       if (!['https:', 'http:'].includes(url.protocol)) throw new Error('LibreTranslate URL must use HTTP or HTTPS');
       const body = { q: part, source: s.sourceLang, target: s.targetLang, format: 'text' };
-      if (s.apiKey) body.api_key = s.apiKey;
+      if (s.apiKey) {
+        if (!await browser.permissions.contains({ data_collection: ['authenticationInfo'] })) throw new Error('Permission to send your API key is disabled. Save your settings in Advanced settings to request permission again, or clear the API key.');
+        body.api_key = s.apiKey;
+      }
       const data = await fetchChecked(job, url.href, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
       if (data.error) throw new Error(data.error);
       output = data.translatedText;

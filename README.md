@@ -25,7 +25,7 @@ The popup lets you choose languages, switch the display mode, or select a missed
 
 ## Install in Firefox
 
-You'll need Firefox 115 or newer.
+You'll need Firefox 140 or newer. Firefox shows the extension's data-transmission permissions during installation.
 
 1. Download this repository using **Code → Download ZIP**, then extract it. You can also clone it with Git.
 2. Open `about:debugging#/runtime/this-firefox` in Firefox.
@@ -58,6 +58,8 @@ Text recognition runs in your browser using Tesseract. English, French, and Arab
 
 Image processing stays in the browser. The recognized text goes to the translation service you choose: Google Translate, MyMemory, or LibreTranslate. You can use your own LibreTranslate server and API key. Preferences and cached translations are stored by the extension.
 
+Firefox requests consent for website content and browsing information used by image requests. Sending a LibreTranslate API key needs a separate optional permission, requested when you save it in Advanced settings. See the [privacy policy](PRIVACY.md) for the data sent to each service and how to clear saved data.
+
 The default Google Translate endpoint is unofficial and may stop working or limit requests. MyMemory has usage quotas, and LibreTranslate services may require an API key. The extension reports service errors rather than switching providers automatically.
 
 ## What can still go wrong
@@ -74,7 +76,7 @@ With Python 3 and Node.js installed, run:
 npm run package
 ```
 
-This creates `dist/manga-translator-3.1.0.xpi` with the extension code and OCR files. The package still needs Mozilla signing for permanent Firefox installation. You can load `manifest.json` directly while developing; the extension doesn't need an npm install.
+This creates `dist/manga-translator-3.1.1.xpi` with the extension code and OCR files. The package still needs Mozilla signing for permanent Firefox installation. You can load `manifest.json` directly while developing; the extension doesn't need an npm install.
 
 ## License
 

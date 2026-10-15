@@ -1,6 +1,6 @@
 {
   "name": "manga-translator-firefox-extension",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Firefox extension to translate manga and manhwa images using free OCR and translation services",
   "private": true,
   "scripts": {
@@ -32,6 +32,6 @@
   "homepage": "https://github.com/toufik-az/Translate-image-extantion#readme",
   "firefox": {
     "id": "manga-translator@example.com",
-    "strict_min_version": "115.0"
+    "strict_min_version": "140.0"
   }
 }
