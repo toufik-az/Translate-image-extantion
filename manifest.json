@@ -1,0 +1,57 @@
+{
+  "manifest_version": 2,
+  "name": "Manga Translator",
+  "version": "3.1.0",
+  "description": "Translate text in manga and manhwa images using OCR and free translation services",
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "manga-translator@example.com",
+      "strict_min_version": "115.0"
+    }
+  },
+
+  "icons": {
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png"
+  },
+
+  "permissions": [
+    "activeTab",
+    "storage",
+    "<all_urls>",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+
+  "browser_action": {
+    "default_icon": {
+      "48": "icons/icon-48.png",
+      "96": "icons/icon-96.png"
+    },
+    "default_title": "Manga Translator",
+    "default_popup": "popup/popup.html"
+  },
+
+  "background": {
+    "scripts": ["shared/core.js", "libs/tesseract.min.js", "background/vision.js", "background/background.js"],
+    "persistent": true
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["shared/core.js", "content/content.js"],
+      "css": ["content/content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+
+  "content_security_policy": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'; connect-src 'self' https: http: data: blob:; img-src 'self' https: http: data: blob:; worker-src 'self'"
+}

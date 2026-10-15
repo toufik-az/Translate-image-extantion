@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Manga Translator - Settings</title><link rel="stylesheet" href="../popup/popup.css"></head><body class="options">
+<header><div class="logo" aria-hidden="true">文A</div><div><h1>Image Text Translator</h1><div class="sub">Advanced settings</div></div></header>
+<form id="settingsForm">
+<fieldset><legend>General</legend>
+<label class="check"><input id="autoTranslate" type="checkbox"> Start automatically on new pages</label>
+<p class="hint">When enabled, visible images translate first, then the next five images are prepared while you read.</p>
+<div class="two"><label>Source language<select id="sourceLang"><option value="en">English</option><option value="fr">French</option><option value="ar">Arabic</option><option value="ja">Japanese</option><option value="ko">Korean</option><option value="zh">Chinese</option><option value="auto">Multilingual (slower)</option></select></label><label>Target language<select id="targetLang"><option value="ar">Arabic</option><option value="fr">French</option><option value="en">English</option><option value="ja">Japanese</option><option value="ko">Korean</option><option value="zh">Chinese</option><option value="es">Spanish</option><option value="de">German</option><option value="pt">Portuguese</option><option value="ru">Russian</option><option value="hi">Hindi</option><option value="it">Italian</option></select></label></div>
+<label>Display<select id="displayMode"><option value="overlay">In-place</option><option value="panel">Reading panel</option></select></label><p class="hint">In-place covers each speech region. Reading panel collects the image’s translations into a readable card.</p>
+</fieldset>
+<fieldset><legend>Text recognition</legend><p class="hint">Choose the language printed in the image. Recognition runs locally. English, French and Arabic are included; other languages download on first use.</p>
+<label class="check"><input type="checkbox" id="verticalText"> Recognize vertical Japanese text</label>
+<label>Minimum image area (width × height)<input type="number" id="minImageSize" min="100" max="1000000" step="100"></label>
+<label class="check"><input type="checkbox" id="showBoundingBoxes"> Show detected text outlines</label>
+</fieldset>
+<fieldset><legend>Appearance</legend>
+<label>Maximum text size <output id="fontSizeValue"></output><input type="range" id="fontSize" min="10" max="48" step="1"></label>
+<div class="two"><label>Background <input type="color" id="overlayBgColor"></label><label>Text color <input type="color" id="textColor"></label></div>
+<label>Background opacity <output id="opacityValue"></output><input type="range" id="overlayOpacity" min="0" max="1" step="0.05"></label>
+<label>Font<select id="fontFamily"><option value="Arial, Tahoma, sans-serif">Arial / Tahoma</option><option value="Arial, sans-serif">Arial</option><option value="'Segoe UI', sans-serif">Segoe UI</option><option value="'Comic Sans MS', cursive">Comic Sans MS</option><option value="Georgia, serif">Georgia</option></select></label>
+</fieldset>
+<fieldset><legend>Translation service</legend>
+<label>Service<select id="translationAPI"><option value="google">Google Translate (unofficial endpoint)</option><option value="mymemory">MyMemory</option><option value="libretranslate">LibreTranslate public service</option><option value="libretranslate-custom">LibreTranslate custom server</option></select></label>
+<div id="libreBox"><label>Server URL<input type="url" id="customAPIUrl" placeholder="http://localhost:5000"></label><label>API key (optional)<input type="password" id="apiKey" autocomplete="off"></label></div>
+<p class="hint">Detected text is sent to the selected service. Providers may have quotas or require an API key.</p>
+<label>Request timeout (seconds)<input type="number" id="apiTimeout" min="5" max="120" step="5"></label>
+</fieldset>
+<fieldset><legend>Cache</legend><label class="check"><input type="checkbox" id="enableCache"> Remember translations on this device</label><label>Keep cached translations for (days)<input type="number" id="cacheExpiry" min="1" max="30"></label><button type="button" class="btn btn-soft" id="clearCache">Clear translation cache</button></fieldset>
+<div class="save-bar"><button type="submit" class="btn btn-acc">Save settings</button><button type="button" class="btn btn-soft" id="reset">Reset defaults</button><span class="hint" id="status" role="status"></span></div>
+</form><script src="../shared/core.js"></script><script src="options.js"></script></body></html>

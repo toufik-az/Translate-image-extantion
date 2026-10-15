@@ -1,0 +1,21 @@
+# Local testing and guides
+/tests/
+/TESTING.md
+/QUICKSTART.md
+/.test-artifacts/
+
+# Generated packages and dependencies
+/dist/
+node_modules/
+__pycache__/
+*.py[cod]
+*.log
+
+# Local editor settings and credentials
+/.vscode/
+/.idea/
+.env
+.env.*
+!.env.example
+Thumbs.db
+.DS_Store
