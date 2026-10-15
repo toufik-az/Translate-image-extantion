@@ -12,5 +12,11 @@ with ZipFile(destination, 'w', ZIP_DEFLATED) as archive:
     for folder in ['shared', 'background', 'content', 'popup', 'options', 'icons', 'libs']:
         for file in (root / folder).rglob('*'):
             if file.is_file():
+                # Keep development helpers and the unused alternate OCR core
+                # out of the installable extension, even if they exist locally.
+                if folder == 'icons' and file.suffix != '.png':
+                    continue
+                if folder == 'libs' and file.name == 'tesseract-core.wasm.js':
+                    continue
                 archive.write(file, file.relative_to(root).as_posix())
 print(destination)

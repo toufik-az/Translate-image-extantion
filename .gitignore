@@ -4,6 +4,9 @@
 /QUICKSTART.md
 /.test-artifacts/
 
+# Unused alternate OCR core (the extension loads the SIMD core)
+/libs/tesseract-core.wasm.js
+
 # Generated packages and dependencies
 /dist/
 node_modules/
