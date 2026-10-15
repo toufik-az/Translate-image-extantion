@@ -37,6 +37,8 @@ For an English chapter you want to read in Arabic, choose English as the source 
 
 Firefox removes temporary add-ons when it closes. Load the extension again after restarting. A permanent installation requires a package signed by Mozilla.
 
+To install permanently, submit the built XPI through [Mozilla's Add-on Developer Hub](https://addons.mozilla.org/developers/addon/submit/distribution). Choose **On your own** if you want a signed file without a public store listing. After validation and signing, download the signed XPI. In Firefox, open `about:addons`, click the gear menu, choose **Install Add-on From File**, and select that signed file. The unsigned package generated locally cannot install permanently in regular Firefox. See [Mozilla's submission guide](https://extensionworkshop.com/documentation/publish/submitting-an-add-on/) for the full process.
+
 ## While you're reading
 
 The extension translates visible images first, then prepares the next five images while you read. You can sit on the same page and let it catch up. If you jump ahead during a fight scene, the queue moves to your new position after the current image finishes processing.
