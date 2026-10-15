@@ -4,6 +4,25 @@ Manga Translator is a Firefox extension for reading manga and webtoons in anothe
 
 English, French, and Arabic text recognition works out of the box. Japanese, Korean, Chinese, and a multilingual mode are available too, with language files downloaded on first use. Translation requires an internet connection.
 
+## Screenshots
+
+These screenshots show the extension running in Firefox on an original sample page, including a bubble corrected with the selection tool. The translations come from the extension's OCR and translation service.
+
+| Original text | Arabic translation |
+| --- | --- |
+| ![Sample speech bubbles in English](docs/screenshots/original.png) | ![The same speech bubbles translated into Arabic](docs/screenshots/translation-ar.png) |
+
+The popup lets you choose languages, switch the display mode, or select a missed bubble.
+
+<img src="docs/screenshots/popup.png" alt="Manga Translator popup with English to Arabic selected and five-image read-ahead enabled" width="320">
+
+<details>
+<summary>See the French translation</summary>
+
+![The sample page translated into French](docs/screenshots/translation-fr.png)
+
+</details>
+
 ## Install in Firefox
 
 You'll need Firefox 115 or newer.
